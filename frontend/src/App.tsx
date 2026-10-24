@@ -60,7 +60,11 @@ type AnalysisResponse = {
   markdown: string
 }
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD
+    ? 'https://service-change-impact-radar-backend-ai.onrender.com'
+    : 'http://localhost:8080')
 
 const SEVERITY_ORDER: Severity[] = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']
 
