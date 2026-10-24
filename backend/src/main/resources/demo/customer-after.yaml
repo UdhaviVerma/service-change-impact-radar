@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Customer Service API
+  version: 1.1.0
+paths:
+  /api/v2/customers/{id}:
+    get:
+      operationId: getCustomerById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+components:
+  schemas:
+    CustomerProfile:
+      type: object
+      required: [id, status, countryCode]
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+          enum: [ACTIVE, PENDING]
+        countryCode:
+          type: string
+        lifetimeSpend:
+          type: string
+x-events:
+  CustomerSnapshot:
+    type: object
+    required: [customerId, status]
+    properties:
+      customerId:
+        type: string
+      status:
+        type: string
+        enum: [ACTIVE, PENDING]
+      loyaltyTier:
+        type: integer
